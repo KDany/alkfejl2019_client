@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col">
+      <h1 class="display-2">My recipes</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cookbook of filteredCookbook" (click)="onSelectCookbook(cookbook)" [class.table-info]="cookbook === selectedCookbook" >
+            <th scope="row">{{ cookbook.id }}</th>
+            <td>
+              <a [routerLink]="['/cookbook', cookbook.id]">
+                {{ cookbook.title }}
+              </a>
+            </td>
+            <td>{{ cookbook.ingredients }}</td>
+            <td>{{ cookbook.status }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="onDeleteClick(cookbook.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <status-filter [status]="selectedStatus" (onChange)="onFilterChange($event)"></status-filter>
+  
+  <button mat-raised-button color="primary" (click)="onNewClick()">New recipe</button>
+  <div class="col" *ngIf="selectedCookbook">
+    <cookbook-form [cookbook]="selectedCookbook" (onSubmit)="onFormSubmit($event)"></cookbook-form>
+  </div>
+
+
+  
+  
+    
+    
+  

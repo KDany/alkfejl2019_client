@@ -1,0 +1,16 @@
+
+<h1 class="display-2">Recipe #{{ cookbook.id }}</h1>
+<dl class="row">
+  <dt class="col-sm-3">Title</dt>
+  <dd class="col-sm-9">{{ cookbook.title }}</dd>
+
+  <dt class="col-sm-3">Ingredients</dt>
+  <dd class="col-sm-9">{{ cookbook.ingredients }}</dd>
+  
+  <dt class="col-sm-3">Description</dt>
+  <dd class="col-sm-9">{{ cookbook.description }}</dd>
+  
+  <dt class="col-sm-3">Status</dt>
+  <dd class="col-sm-9">{{ cookbook.status }}</dd>
+</dl>
+<button mat-raised-button routerLink="/cookbooks">Back</button>
