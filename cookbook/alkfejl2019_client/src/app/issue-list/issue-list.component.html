@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col">
+      <h1 class="display-2">My recipes</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status (Owner)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let issue of filteredIssues" (click)="onSelectIssue(issue)" [class.table-info]="issue === selectedIssue" >
+            <th scope="row">{{ issue.id }}</th>
+            <td>
+              <a [routerLink]="['/issues', issue.id]">
+                {{ issue.title }}
+              </a>
+            </td>
+            <td>{{ issue.author }}</td>
+            <td>{{ issue.description }}</td>
+            <td>{{ issue.status }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="onDeleteClick(issue.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <status-filter [status]="selectedStatus" (onChange)="onFilterChange($event)"></status-filter>
+  
+  <button mat-raised-button color="primary" (click)="onNewClick()">New issue</button>
+  <div class="col" *ngIf="selectedIssue">
+    <issue-form [issue]="selectedIssue" (onSubmit)="onFormSubmit($event)"></issue-form>
+  </div>
+
+
+  
+  
+    
+    
+  
