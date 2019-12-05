@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { RecipeListComponent } from '../recipe-list/recipe-list.component';
 
 @Component({
   selector: 'status-filter',
@@ -8,10 +10,24 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class StatusFilterComponent  {
 
   @Input('status') selectedStatus: string = '';
-  public statuses: string[] = [ 'ADMIN', 'USER01', 'USER02' ];
+  public statuses: string[] = [];
   @Output() onChange = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(
+    public authService: AuthService,
+    public recipeList: RecipeListComponent
+  ) {
+    recipeList.statusFilterComponent = this;
+    //this.onInit();
+  }
+
+  /*onInit(): void {
+    //this.statuses.push.apply(this.statuses, this.recipeList.getOwners());
+    this.statuses = this.recipeList.getOwners();
+    if(!(this.statuses.indexOf(this.authService.user.username.toUpperCase()) >= 0)) {
+      this.statuses.push(this.authService.user.username.toUpperCase());
+    }
+  }*/
 
   onFilterChange(status: string): void {
     this.selectedStatus = status;

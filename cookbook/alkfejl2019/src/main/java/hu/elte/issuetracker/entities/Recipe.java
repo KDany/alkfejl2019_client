@@ -34,7 +34,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Issue {
+public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,18 +62,21 @@ public class Issue {
     @UpdateTimestamp
     private LocalDateTime updated_at;
     
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "recipe")
     private List<Message> messages;
     
     @ManyToMany
     @JoinTable
     private List<Label> labels;
     
-    @Column(nullable = false)
+    /*@Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
     
     public enum Status {
         ADMIN, USER01, USER02
-    }
+    }*/
+    
+    @Column(nullable = false)
+    private String status;
 }

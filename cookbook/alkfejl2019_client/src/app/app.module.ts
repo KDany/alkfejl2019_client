@@ -10,9 +10,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule, MatButtonToggleModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { IssueListComponent } from './issue-list/issue-list.component';
-import { IssueFormComponent } from './issue-form/issue-form.component';
-import { IssueDetailComponent } from './issue-detail/issue-detail.component'; 
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipeFormComponent } from './recipe-form/recipe-form.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component'; 
 import { StatusFilterComponent } from './status-filter/status-filter.component';
 import { RoutingModule } from './routing/routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -20,9 +20,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
 @NgModule({
   declarations: [
     AppComponent,
-    IssueListComponent,
-    IssueFormComponent,
-    IssueDetailComponent,
+    RecipeListComponent,
+    RecipeFormComponent,
+    RecipeDetailComponent,
     StatusFilterComponent,
     LoginFormComponent
   ],

@@ -7,8 +7,8 @@
   <span class="fill-remaining-space" fxHide="false" fxHide.gt-sm></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
     <div *ngIf="authService.isLoggedIn">
-      <button mat-button routerLink="/issues">My recipes</button>
-      <button mat-button routerLink="/issues/add">New recipe</button>
+      <button mat-button routerLink="/recipes">My recipes</button>
+      <button mat-button routerLink="/recipes/add">New recipe</button>
       <span>Hello {{ authService.user.username }}!</span>
       <button mat-button (click)="logout()">Logout</button>
     </div>
@@ -22,8 +22,8 @@
 </mat-toolbar>
 <mat-menu xPosition="before" #menu="matMenu">
   <div *ngIf="authService.isLoggedIn">
-    <button mat-menu-item routerLink="/issues">My recipes</button>
-    <button mat-menu-item routerLink="/issues/add">New recipe</button>
+    <button mat-menu-item routerLink="/recipes">My recipes</button>
+    <button mat-menu-item routerLink="/recipes/add">New recipe</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </div>
   <div *ngIf="!authService.isLoggedIn">

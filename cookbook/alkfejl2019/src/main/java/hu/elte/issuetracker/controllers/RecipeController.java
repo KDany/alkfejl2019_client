@@ -5,10 +5,10 @@
  */
 package hu.elte.issuetracker.controllers;
 
-import hu.elte.issuetracker.entities.Issue;
+import hu.elte.issuetracker.entities.Recipe;
 import hu.elte.issuetracker.entities.Label;
 import hu.elte.issuetracker.entities.Message;
-import hu.elte.issuetracker.repositories.IssueRepository;
+import hu.elte.issuetracker.repositories.RecipeRepository;
 import hu.elte.issuetracker.repositories.LabelRepository;
 import hu.elte.issuetracker.repositories.MessageRepository;
 import hu.elte.issuetracker.security.AuthenticatedUser;
@@ -32,11 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/issues")
-public class IssueController {
+@RequestMapping("/recipes")
+public class RecipeController {
 
     @Autowired
-    private IssueRepository issueRepository;
+    private RecipeRepository recipeRepository;
 
     @Autowired
     private MessageRepository messageRepository;
@@ -48,32 +48,32 @@ public class IssueController {
     private AuthenticatedUser authenticatedUser;
     
     @GetMapping("")
-    public ResponseEntity<Iterable<Issue>> getAll() {
-        return ResponseEntity.ok(issueRepository.findAll());
+    public ResponseEntity<Iterable<Recipe>> getAll() {
+        return ResponseEntity.ok(recipeRepository.findAll());
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Issue> get(@PathVariable Integer id) {
-        Optional<Issue> issue = issueRepository.findById(id);
-        if (issue.isPresent()) {
-            return ResponseEntity.ok(issue.get());
+    public ResponseEntity<Recipe> get(@PathVariable Integer id) {
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        if (recipe.isPresent()) {
+            return ResponseEntity.ok(recipe.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("")
-    public ResponseEntity<Issue> post(@RequestBody Issue issue) {
-        Issue savedIssue = issueRepository.save(issue);
-        return ResponseEntity.ok(savedIssue);
+    public ResponseEntity<Recipe> post(@RequestBody Recipe recipe) {
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        return ResponseEntity.ok(savedRecipe);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Issue> put(@RequestBody Issue issue, @PathVariable Integer id) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            issue.setId(id);
-            return ResponseEntity.ok(issueRepository.save(issue));
+    public ResponseEntity<Recipe> put(@RequestBody Recipe recipe, @PathVariable Integer id) {
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            recipe.setId(id);
+            return ResponseEntity.ok(recipeRepository.save(recipe));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -81,9 +81,9 @@ public class IssueController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            issueRepository.deleteById(id);
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            recipeRepository.deleteById(id);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -92,9 +92,9 @@ public class IssueController {
 
     @GetMapping("/{id}/messages")
     public ResponseEntity<Iterable<Message>> messages(@PathVariable Integer id) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            return ResponseEntity.ok(oIssue.get().getMessages());
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            return ResponseEntity.ok(oRecipe.get().getMessages());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -102,10 +102,10 @@ public class IssueController {
 
     @PostMapping("/{id}/messages")
     public ResponseEntity<Message> insertMessage(@PathVariable Integer id, @RequestBody Message message) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            Issue issue = oIssue.get();
-            message.setIssue(issue);
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            Recipe recipe = oRecipe.get();
+            message.setRecipe(recipe);
             return ResponseEntity.ok(messageRepository.save(message));
         } else {
             return ResponseEntity.notFound().build();
@@ -114,9 +114,9 @@ public class IssueController {
 
     @GetMapping("/{id}/labels")
     public ResponseEntity<Iterable<Label>> labels(@PathVariable Integer id) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            return ResponseEntity.ok(oIssue.get().getLabels());
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            return ResponseEntity.ok(oRecipe.get().getLabels());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -124,12 +124,12 @@ public class IssueController {
 
     @PostMapping("/{id}/labels")
     public ResponseEntity<Label> insertLabel(@PathVariable Integer id, @RequestBody Label label) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            Issue issue = oIssue.get();
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            Recipe recipe = oRecipe.get();
             Label newLabel = labelRepository.save(label);
-            issue.getLabels().add(newLabel);
-            issueRepository.save(issue);  // have to trigger from the @JoinTable side
+            recipe.getLabels().add(newLabel);
+            recipeRepository.save(recipe);  // have to trigger from the @JoinTable side
             return ResponseEntity.ok(newLabel);
         } else {
             return ResponseEntity.notFound().build();
@@ -138,9 +138,9 @@ public class IssueController {
 
     @PutMapping("/{id}/labels")
     public ResponseEntity<Iterable<Label>> modifyLabels(@PathVariable Integer id, @RequestBody List<Label> labels) {
-        Optional<Issue> oIssue = issueRepository.findById(id);
-        if (oIssue.isPresent()) {
-            Issue issue = oIssue.get();
+        Optional<Recipe> oRecipe = recipeRepository.findById(id);
+        if (oRecipe.isPresent()) {
+            Recipe recipe = oRecipe.get();
 
             // if we would like to add new labels as well
             for (Label label: labels) {
@@ -149,8 +149,8 @@ public class IssueController {
                 }
             }
 
-            issue.setLabels(labels);
-            issueRepository.save(issue);
+            recipe.setLabels(labels);
+            recipeRepository.save(recipe);
             return ResponseEntity.ok(labels);
         } else {
             return ResponseEntity.notFound().build();

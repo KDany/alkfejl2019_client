@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'issue-tracker-client';
+  title: string = 'recipe-tracker-client';
 
   constructor(public authService: AuthService) {}
 

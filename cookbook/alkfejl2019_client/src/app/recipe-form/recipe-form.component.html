@@ -1,6 +1,6 @@
-<form (submit)="submit(issueForm)" #issueForm="ngForm">
+<form (submit)="submit(recipeForm)" #recipeForm="ngForm">
   <div class="form-group">
-    <!-- <small id="authorHelp" class="form-text text-muted">Give the author of the issue (e.g. labor)</small> -->
+    <!-- <small id="authorHelp" class="form-text text-muted">Give the author of the recipe (e.g. labor)</small> -->
     <mat-form-field>
       <input matInput
         type="text"
@@ -57,9 +57,9 @@
     </div>
     
     <button mat-raised-button
-      [disabled]="!issueForm.valid" 
+      [disabled]="!recipeForm.valid" 
       type="submit"
       color="primary">
-      Save issue
+      Save recipe
     </button>
   </form>

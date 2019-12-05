@@ -53,5 +53,5 @@ public class Label {
 
     @ManyToMany(mappedBy = "labels")
     @JsonIgnore
-    private List<Issue> issues;
+    private List<Recipe> recipes;
 }

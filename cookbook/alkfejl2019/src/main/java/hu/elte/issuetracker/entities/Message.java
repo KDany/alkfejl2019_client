@@ -52,7 +52,7 @@ public class Message {
     @ManyToOne
     @JoinColumn
     @JsonIgnore
-    private Issue issue;
+    private Recipe recipe;
 
 }
 

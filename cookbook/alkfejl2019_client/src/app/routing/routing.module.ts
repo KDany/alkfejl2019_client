@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IssueListComponent } from "../issue-list/issue-list.component";
-import { IssueFormComponent } from '../issue-form/issue-form.component';
-import { IssueDetailComponent } from '../issue-detail/issue-detail.component';
+import { RecipeListComponent } from "../recipe-list/recipe-list.component";
+import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
+import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
 import { AuthGuard } from '../auth.guard';
 import { LoginFormComponent } from '../login-form/login-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/issues',
+    redirectTo: '/recipes',
     pathMatch: 'full'
   },
   {
-    path: 'issues',
-    component: IssueListComponent,
+    path: 'recipes',
+    component: RecipeListComponent,
     canActivate: [ AuthGuard ]
   },
   {
-    path: 'issues/add',
-    component: IssueFormComponent
+    path: 'recipes/add',
+    component: RecipeFormComponent
   },
   {
-    path: 'issues/:id',
-    component: IssueDetailComponent
+    path: 'recipes/:id',
+    component: RecipeDetailComponent
   },
   {
     path: 'login',

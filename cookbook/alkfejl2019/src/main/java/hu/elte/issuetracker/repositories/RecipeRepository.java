@@ -5,7 +5,7 @@
  */
 package hu.elte.issuetracker.repositories;
 
-import hu.elte.issuetracker.entities.Issue;
+import hu.elte.issuetracker.entities.Recipe;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author KeresztiKrisztián
  */
 @Repository
-public interface IssueRepository extends CrudRepository<Issue, Integer> {
+public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
 }
